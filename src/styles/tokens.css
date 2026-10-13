@@ -1,0 +1,158 @@
+/**
+ * Design Tokens — Operation Birthday Website
+ * Establishes shared foundation, Pirah brand tokens, and Birthday experience tokens.
+ */
+
+:root {
+  /* ========================================================================
+     1. Shared Typography Scales & Families
+     ======================================================================== */
+  --font-serif: 'Playfair Display', Georgia, Cambria, 'Times New Roman', serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-handwriting: 'Alex Brush', cursive, Georgia, serif;
+  --font-mono: ui-monospace, SFMono-Regular, Consolas, monospace;
+
+  /* Font Sizes (Fluid / Responsive Scale) */
+  --text-2xs: clamp(0.7rem, 0.65rem + 0.25vw, 0.75rem);
+  --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.8125rem);
+  --text-sm: clamp(0.85rem, 0.8rem + 0.25vw, 0.925rem);
+  --text-base: clamp(0.95rem, 0.9rem + 0.25vw, 1.05rem);
+  --text-lg: clamp(1.1rem, 1.02rem + 0.4vw, 1.25rem);
+  --text-xl: clamp(1.3rem, 1.18rem + 0.6vw, 1.55rem);
+  --text-2xl: clamp(1.6rem, 1.4rem + 1vw, 2rem);
+  --text-3xl: clamp(2rem, 1.7rem + 1.5vw, 2.75rem);
+  --text-4xl: clamp(2.5rem, 2rem + 2.5vw, 3.75rem);
+
+  /* Font Weights */
+  --fw-light: 300;
+  --fw-normal: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  /* Line Heights */
+  --lh-tight: 1.2;
+  --lh-snug: 1.35;
+  --lh-normal: 1.6;
+  --lh-relaxed: 1.75;
+
+  /* Letter Spacing */
+  --tracking-tight: -0.025em;
+  --tracking-normal: 0em;
+  --tracking-wide: 0.04em;
+  --tracking-wider: 0.1em;
+  --tracking-widest: 0.2em;
+
+  /* ========================================================================
+     2. Spacing & Sizing Scale
+     ======================================================================== */
+  --space-3xs: 0.25rem;  /* 4px */
+  --space-2xs: 0.5rem;   /* 8px */
+  --space-xs: 0.75rem;   /* 12px */
+  --space-sm: 1rem;      /* 16px */
+  --space-md: 1.5rem;    /* 24px */
+  --space-lg: 2rem;      /* 32px */
+  --space-xl: 3rem;      /* 48px */
+  --space-2xl: 4rem;     /* 64px */
+  --space-3xl: 6rem;     /* 96px */
+
+  /* Border Radii */
+  --radius-xs: 3px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  /* ========================================================================
+     3. Shared Elevation, Shadows & Transitions
+     ======================================================================== */
+  --shadow-subtle: 0 2px 8px rgba(0, 0, 0, 0.35);
+  --shadow-card: 0 8px 24px rgba(0, 0, 0, 0.45);
+  --shadow-elevated: 0 16px 48px rgba(0, 0, 0, 0.65);
+  --shadow-gold-subtle: 0 0 24px rgba(212, 175, 55, 0.12);
+  --shadow-rose-subtle: 0 0 24px rgba(126, 25, 42, 0.2);
+
+  --ease-luxury: cubic-bezier(0.22, 1, 0.36, 1);
+  --transition-fast: 150ms var(--ease-luxury);
+  --transition-normal: 300ms var(--ease-luxury);
+  --transition-slow: 550ms var(--ease-luxury);
+
+  /* ========================================================================
+     4. Pirah Brand Tokens (Directly derived from Pirah Logo reference)
+     ======================================================================== */
+  --pirah-bg-pitch: #070709;
+  --pirah-surface-charcoal: #121318;
+  --pirah-surface-elevated: #1a1b22;
+  --pirah-surface-hover: #22242e;
+
+  /* Gold & Champagne Spectrum */
+  --pirah-gold-base: #d4af37;
+  --pirah-gold-champagne: #dfbe68;
+  --pirah-gold-antique: #b38e36;
+  --pirah-gold-subtle: rgba(212, 175, 55, 0.12);
+  --pirah-gold-border: rgba(212, 175, 55, 0.28);
+  --pirah-gold-border-focus: rgba(212, 175, 55, 0.65);
+
+  /* Metallic Silver Spectrum */
+  --pirah-silver-base: #c0c7d0;
+  --pirah-silver-light: #e2e6ea;
+  --pirah-silver-subtle: rgba(192, 199, 208, 0.12);
+  --pirah-silver-border: rgba(192, 199, 208, 0.24);
+
+  /* Midnight Navy Accents */
+  --pirah-navy-dark: #0e131d;
+
+  /* Typography Colors for Pirah */
+  --pirah-text-ivory: #fbf9f5;
+  --pirah-text-secondary: #c2c4ce;
+  --pirah-text-muted: #8b8e9b;
+  --pirah-text-faint: #575a66;
+
+  /* Borders */
+  --pirah-border-subtle: rgba(255, 255, 255, 0.08);
+  --pirah-border-strong: rgba(255, 255, 255, 0.16);
+
+  /* ========================================================================
+     5. Birthday Experience Tokens (Cinematic Dark + Cream Stationery + Rose)
+     ======================================================================== */
+  --bday-bg-deep: #0a0709;
+  --bday-surface: #150f14;
+  --bday-surface-card: #1c141a;
+
+  /* Cream Stationery Envelope & Letter */
+  --bday-stationery-cream: #fcf9f2;
+  --bday-stationery-fold: #f2ebd9;
+  --bday-stationery-shadow: rgba(24, 14, 18, 0.3);
+  --bday-ink-primary: #1f1917;
+  --bday-ink-muted: #5e524d;
+
+  /* Sculpted Rose & Wine Seal Motif */
+  --bday-rose-base: #7e192a;
+  --bday-rose-glow: #a8233b;
+  --bday-rose-deep: #4d0d18;
+  --bday-rose-subtle: rgba(126, 25, 42, 0.18);
+  --bday-rose-border: rgba(126, 25, 42, 0.35);
+
+  /* Warm Atmosphere & Gilt Accents */
+  --bday-warm-gilt: #d9b166;
+  --bday-text-light: #fdfaf6;
+  --bday-text-secondary: #cebfc6;
+  --bday-text-muted: #9c8a92;
+  --bday-border-subtle: rgba(255, 255, 255, 0.08);
+  --bday-border-rose: rgba(126, 25, 42, 0.4);
+}
+
+/* ==========================================================================
+   6. Accessibility & Reduced Motion Overrides
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
