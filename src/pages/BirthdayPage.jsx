@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import SculptedRoseSeal from '../components/SculptedRoseSeal';
+import FloatingPhotoFrames from '../components/FloatingPhotoFrames';
 import '../styles/birthday-envelope.css';
 
 /**
@@ -304,6 +305,9 @@ export default function BirthdayPage() {
         className={`envelope-physical-scene ${isLetterEmerged ? 'scene-letter-emerged' : ''}`}
         aria-label="Physical Birthday Stationery Envelope"
       >
+        {/* Floating Keepsake Photographs of Ife Mi */}
+        <FloatingPhotoFrames stage={stage} isLetterEmerged={isLetterEmerged} />
+
         <div className={`envelope-pouch-container stage-${stage}`}>
           {/* 1. Envelope Back Wall & Interior Lining (Layer 1: z-index 10) */}
           <div className="envelope-back-wall">

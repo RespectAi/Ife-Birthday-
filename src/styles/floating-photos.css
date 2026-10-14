@@ -1,0 +1,389 @@
+/* ==========================================================================
+   Curved Photo Ribbon — Birthday Envelope Scene
+   Arranges 4 polaroid photograph keepsakes of Ife Mi in an overlapping
+   curved arc along the bottom and right flank of the envelope, pinned with
+   3D golden push-pins matching the user's reference design.
+   ========================================================================== */
+
+.floating-photos-wrapper {
+  position: absolute;
+  inset: 0;
+  pointer-events: none; /* Never intercept touches or clicks intended for envelope or rose seal */
+  z-index: 35; /* Sits in front of envelope bottom pocket, below rose seal (z-index 50) */
+  transition: opacity 1.2s var(--ease-luxury), transform 1.2s var(--ease-luxury);
+}
+
+.curved-photos-arc {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* When envelope opens and letter emerges, gently soften photo presence */
+.floating-photos-wrapper.is-emerging .polaroid-frame {
+  opacity: 0.85;
+  filter: brightness(0.96);
+}
+
+.floating-photos-wrapper.is-emerged .polaroid-frame {
+  opacity: 0.78;
+  filter: brightness(0.92);
+}
+
+/* Individual Polaroid Frame (White instant-film border matching reference) */
+.polaroid-frame {
+  position: absolute;
+  pointer-events: none;
+  user-select: none;
+  border-radius: 4px;
+  background: #ffffff;
+  padding: 8px 8px 24px 8px;
+  box-shadow:
+    0 14px 34px rgba(0, 0, 0, 0.45),
+    0 3px 10px rgba(0, 0, 0, 0.28),
+    0 0 0 1px rgba(0, 0, 0, 0.08);
+  will-change: transform;
+  transition:
+    opacity 1s ease,
+    transform 1.2s var(--ease-luxury),
+    filter 1s ease;
+}
+
+/* 3D Realistic Golden Push-Pin (From User Reference Design) */
+.golden-pushpin {
+  position: absolute;
+  top: -11px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 35% 30%,
+    #fffbe6 0%,
+    #ffdb58 32%,
+    #c99718 68%,
+    #7a5205 100%
+  );
+  box-shadow:
+    0 4px 8px rgba(0, 0, 0, 0.5),
+    0 1px 3px rgba(0, 0, 0, 0.35),
+    inset 0 1.5px 2px rgba(255, 255, 255, 0.95),
+    inset 0 -2px 3px rgba(0, 0, 0, 0.5);
+  border: 0.5px solid rgba(255, 245, 190, 0.8);
+  z-index: 15;
+}
+
+/* Specular Light Reflection on Push-Pin Dome */
+.pin-highlight {
+  position: absolute;
+  top: 3px;
+  left: 5px;
+  width: 6px;
+  height: 3.5px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 50%;
+  filter: blur(0.3px);
+  pointer-events: none;
+}
+
+/* Push-Pin Drop Shadow on Photo Paper */
+.golden-pushpin::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 14px;
+  height: 5px;
+  background: rgba(0, 0, 0, 0.35);
+  border-radius: 50%;
+  filter: blur(2px);
+  z-index: -1;
+}
+
+/* Photo Inner Wrapper */
+.polaroid-inner {
+  display: flex;
+  flex-direction: column;
+}
+
+.polaroid-img-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 2px;
+  background: #181215;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.25);
+}
+
+.polaroid-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  display: block;
+}
+
+/* Glare & Surface Sheen */
+.polaroid-glare {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.18) 0%,
+    rgba(255, 255, 255, 0.03) 35%,
+    rgba(0, 0, 0, 0.04) 100%
+  );
+  pointer-events: none;
+}
+
+/* Bottom Chin & Handwritten Caption */
+.polaroid-chin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 5px;
+  min-height: 20px;
+}
+
+.polaroid-caption {
+  font-family: 'Alex Brush', cursive, var(--font-serif);
+  font-size: 0.95rem;
+  color: #4a382c;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  line-height: 1.1;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);
+}
+
+/* ==========================================================================
+   Desktop Ribbon Positions (min-width: 900px)
+   Matches user's hand-drawn sketch:
+   4 polaroid keepsakes curving from bottom-center-right, stepping up
+   around the bottom-right corner and ascending along the right flank.
+   ========================================================================== */
+@media (min-width: 900px) {
+  /* Box 1: Bottom center-right, straddling bottom seam */
+  .polaroid-frame.curve-pos-1 {
+    width: 108px;
+    left: 215px;
+    bottom: -102px;
+    transform: rotate(-2deg);
+    animation: curve-float-1 7.2s ease-in-out infinite alternate;
+  }
+
+  /* Box 2: Stepped slightly up toward bottom-right, tiny overlap with Box 1 */
+  .polaroid-frame.curve-pos-2 {
+    width: 108px;
+    left: 318px;
+    bottom: -76px;
+    transform: rotate(2deg);
+    animation: curve-float-2 8.4s ease-in-out infinite alternate;
+  }
+
+  /* Box 3: Stepped up at the bottom-right corner, tiny overlap with Box 2 */
+  .polaroid-frame.curve-pos-3 {
+    width: 108px;
+    left: 418px;
+    bottom: -38px;
+    transform: rotate(-2deg);
+    animation: curve-float-3 7.8s ease-in-out infinite alternate 0.5s;
+  }
+
+  /* Box 4: Highest on the right flank, minimal corner overlap with Box 3 */
+  .polaroid-frame.curve-pos-4 {
+    width: 108px;
+    left: 488px;
+    bottom: 8px;
+    transform: rotate(5deg);
+    animation: curve-float-4 8.9s ease-in-out infinite alternate 1.1s;
+  }
+
+  /* Gentle unified settle when envelope opens */
+  .floating-photos-wrapper.is-emerging .polaroid-frame.curve-pos-1 {
+    transform: rotate(-3deg) translate3d(0, 6px, 0);
+  }
+  .floating-photos-wrapper.is-emerging .polaroid-frame.curve-pos-2 {
+    transform: rotate(1deg) translate3d(0, 6px, 0);
+  }
+  .floating-photos-wrapper.is-emerging .polaroid-frame.curve-pos-3 {
+    transform: rotate(-4deg) translate3d(0, 6px, 0);
+  }
+  .floating-photos-wrapper.is-emerging .polaroid-frame.curve-pos-4 {
+    transform: rotate(5deg) translate3d(0, 6px, 0);
+  }
+}
+
+/* ==========================================================================
+   Medium / Tablet Screens (641px to 899px)
+   ========================================================================== */
+@media (min-width: 641px) and (max-width: 899px) {
+  .polaroid-frame.curve-pos-1 {
+    width: 100px;
+    left: 215px;
+    bottom: -95px;
+    transform: rotate(-2deg);
+    animation: curve-float-1 7.2s ease-in-out infinite alternate;
+  }
+
+  .polaroid-frame.curve-pos-2 {
+    width: 100px;
+    left: 310px;
+    bottom: -70px;
+    transform: rotate(2deg);
+    animation: curve-float-2 8.4s ease-in-out infinite alternate;
+  }
+
+  .polaroid-frame.curve-pos-3 {
+    width: 100px;
+    left: 398px;
+    bottom: -35px;
+    transform: rotate(-2deg);
+    animation: curve-float-3 7.8s ease-in-out infinite alternate 0.5s;
+  }
+
+  .polaroid-frame.curve-pos-4 {
+    width: 100px;
+    left: 460px;
+    bottom: 8px;
+    transform: rotate(5deg);
+    animation: curve-float-4 8.9s ease-in-out infinite alternate 1.1s;
+  }
+}
+
+/* ==========================================================================
+   Mobile Screens (max-width: 640px)
+   Scaled curve hugging the bottom-right corner without horizontal clipping
+   ========================================================================== */
+@media (max-width: 640px) {
+  .polaroid-frame {
+    padding: 5px 5px 16px 5px;
+    box-shadow:
+      0 10px 22px rgba(0, 0, 0, 0.48),
+      0 2px 6px rgba(0, 0, 0, 0.3);
+  }
+
+  .golden-pushpin {
+    width: 16px;
+    height: 16px;
+    top: -8px;
+  }
+
+  .pin-highlight {
+    top: 2px;
+    left: 4px;
+    width: 4px;
+    height: 2.5px;
+  }
+
+  .polaroid-chin {
+    min-height: 14px;
+    padding-top: 2px;
+  }
+
+  .polaroid-caption {
+    font-size: 0.65rem;
+  }
+
+  /* Box 1: Bottom center-right */
+  .polaroid-frame.curve-pos-1 {
+    width: 66px;
+    left: 155px;
+    bottom: -58px;
+    transform: rotate(-2deg);
+    animation: curve-float-1 7.2s ease-in-out infinite alternate;
+  }
+
+  /* Box 2: Stepped toward corner */
+  .polaroid-frame.curve-pos-2 {
+    width: 66px;
+    left: 215px;
+    bottom: -42px;
+    transform: rotate(2deg);
+    animation: curve-float-2 8.4s ease-in-out infinite alternate;
+  }
+
+  /* Box 3: At corner */
+  .polaroid-frame.curve-pos-3 {
+    width: 66px;
+    left: 270px;
+    bottom: -18px;
+    transform: rotate(-2deg);
+    animation: curve-float-3 7.8s ease-in-out infinite alternate 0.5s;
+  }
+
+  /* Box 4: Upper right flank */
+  .polaroid-frame.curve-pos-4 {
+    width: 66px;
+    left: 308px;
+    bottom: 10px;
+    transform: rotate(5deg);
+    animation: curve-float-4 8.9s ease-in-out infinite alternate 1.1s;
+  }
+
+  .floating-photos-wrapper.is-emerging .polaroid-frame {
+    opacity: 0.7;
+    transform: translateY(4px);
+  }
+}
+
+/* ==========================================================================
+   Gentle Ambient Float Keyframes
+   Maintains the ascending curve flow while breathing gently
+   ========================================================================== */
+@keyframes curve-float-1 {
+  0% {
+    transform: rotate(-2deg) translate3d(0, 0, 0);
+  }
+  50% {
+    transform: rotate(-3deg) translate3d(-1px, -3px, 0);
+  }
+  100% {
+    transform: rotate(-1deg) translate3d(1px, 2px, 0);
+  }
+}
+
+@keyframes curve-float-2 {
+  0% {
+    transform: rotate(2deg) translate3d(0, 0, 0);
+  }
+  50% {
+    transform: rotate(1deg) translate3d(0, -3px, 0);
+  }
+  100% {
+    transform: rotate(3deg) translate3d(1px, 2px, 0);
+  }
+}
+
+@keyframes curve-float-3 {
+  0% {
+    transform: rotate(-3deg) translate3d(0, 0, 0);
+  }
+  50% {
+    transform: rotate(-2deg) translate3d(0, -3px, 0);
+  }
+  100% {
+    transform: rotate(-4deg) translate3d(-1px, 2px, 0);
+  }
+}
+
+@keyframes curve-float-4 {
+  0% {
+    transform: rotate(6deg) translate3d(0, 0, 0);
+  }
+  50% {
+    transform: rotate(7deg) translate3d(1px, -3px, 0);
+  }
+  100% {
+    transform: rotate(5deg) translate3d(-1px, 2px, 0);
+  }
+}
+
+/* Accessibility: Respect Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .polaroid-frame {
+    animation: none !important;
+    transition: opacity 0.4s ease !important;
+  }
+}
