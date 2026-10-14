@@ -66,6 +66,11 @@ export default function BirthdayPage() {
     return () => clearTimers();
   }, [clearTimers]);
 
+  // Set page title for Birthday Page
+  useEffect(() => {
+    document.title = 'Ife Birthday';
+  }, []);
+
   // Inject noindex metadata dynamically for privacy
   useEffect(() => {
     let metaTag = document.querySelector('meta[name="robots"]');
