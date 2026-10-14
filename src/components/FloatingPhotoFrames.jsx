@@ -81,11 +81,6 @@ export default function FloatingPhotoFrames({ stage = 'sealed', isLetterEmerged 
             className={`polaroid-frame ${item.curveClass} arc-item-${index + 1}`}
             style={{ zIndex: item.zIndex }}
           >
-            {/* 3D Polished Golden Push-Pin from reference design */}
-            <div className="golden-pushpin">
-              <span className="pin-highlight" />
-            </div>
-
             <div className="polaroid-inner">
               <div
                 className={`polaroid-img-wrapper ${item.orientation}`}
